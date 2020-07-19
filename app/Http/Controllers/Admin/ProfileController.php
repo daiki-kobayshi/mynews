@@ -16,9 +16,11 @@ class ProfileController extends Controller
         return view('admin.profile.create');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.profile.edit');
+        $profile = Profile::find($request->id);
+        
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
 
     public function update()
@@ -27,18 +29,20 @@ class ProfileController extends Controller
     }
     
      public function create(Request $request)
-     {
+    {
          
      $this->validate($request, Profile::$rules);
-     $news = new Profiles;
+     $profile = new Profile;
      $form = $request->all();
      
-      unset($form['_token']);
+     unset($form['_token']);
+     unset($form['image']);
       
       $profile->fill($form);
       $profile->save();
      
       return redirect('admin/profile/create');
-    }  
+    }
+   
 }
 

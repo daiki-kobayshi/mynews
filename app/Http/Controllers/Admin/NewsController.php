@@ -22,7 +22,7 @@ class NewsController extends Controller
      $form = $request->all();
      
      // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
-     if ($form['image']) {
+     if (isset($form['image'])) {
          $path = $request->file('image')->store('public/image');
          $news->image_path = basename($path);
      } else {
@@ -80,7 +80,8 @@ class NewsController extends Controller
       // 該当するNews Modelを取得
       $news = News::find($request->id);
       // 削除する
-      $news->delete('admin/news/');
+      $news->delete();
+      return redirect('admin/news/');
   }
   
 }
