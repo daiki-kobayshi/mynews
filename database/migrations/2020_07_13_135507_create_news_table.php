@@ -15,6 +15,7 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
+            //↓長い文章を書きたいときはstringじゃなく、textにする
             $table->string('title'); // ニュースのタイトルを保存するカラム(列)
             $table->string('body'); // ニュースの本文を保存するカラム(列)
             $table->string('image_path')->nullable(); // 画像のパスを保存するカラム(列)
